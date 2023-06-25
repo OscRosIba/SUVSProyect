@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+  usuarioa:
+    build: /Usuario
+    depends_on:
+      - partido
+      - autoridad
+    environment:
+      - IP_AUTORIDAD=autoridad
+    volumes: 
+      - ./Volumenes/IpContainer.txt:/Volumenes/IpContainer.txt
+    command: ["Amarillo", "11111111A"]
+    scale: 2
+    
+  usuariob:
+    build: /Usuario
+    depends_on:
+      - partido
+      - autoridad
+    environment:
+      - IP_AUTORIDAD=autoridad
+    volumes: 
+      - ./Volumenes/IpContainer.txt:/Volumenes/IpContainer.txt
+    command: ["Verde", "22222222B"]
+
+  usuarioc:
+    build: /Usuario
+    depends_on:
+      - partido
+      - autoridad
+    environment:
+      - IP_AUTORIDAD=autoridad
+    volumes: 
+      - ./Volumenes/IpContainer.txt:/Volumenes/IpContainer.txt
+    command: ["Amarillo", "44444444D"]
+
+  partido:
+    build: /Partido
+    volumes: 
+      - ./Volumenes/IpContainer.txt:/Volumenes/IpContainer.txt
+      - ./Volumenes/PBB_Partidos.txt:/Volumenes/PBB_Partidos.txt
+    command: ["17", "13"]
+    scale: 2
+
+  autoridad:
+    build: /Autoridad
+    volumes: 
+      - ./Volumenes/PBB_Autoridad.txt:/Volumenes/PBB_Autoridad.txt
+    command: ["17", "13"]
